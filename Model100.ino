@@ -29,8 +29,9 @@
 // Support for controlling the keyboard's LEDs
 #include "Kaleidoscope-LEDControl.h"
 
-// Support for LED modes that set all LEDs to a single color
-#include "Kaleidoscope-LED-ActiveLayerColor.h"
+// Support for the "Boot greeting" effect, which pulses the 'LED' button for 10s
+// when the keyboard is connected to a computer (or that computer is powered on)
+#include "Kaleidoscope-LEDEffect-BootGreeting.h"
 
 // Support for shared palettes for other plugins, like Colormap below
 #include "Kaleidoscope-LED-Palette-Theme.h"
@@ -80,82 +81,42 @@
 
 // Custom aliases for my sketches
 #include "custom_alias.h"
+#include "const.h"
+#include "Lilith-NamedCharShift.h"
 
-/** This 'enum' is a list of all the macros used by the Model 100's firmware
-  * The names aren't particularly important. What is important is that each
-  * is unique.
-  *
-  * These are the names of your macros. They'll be used in two places.
-  * The first is in your keymap definitions. There, you'll use the syntax
-  * `M(MACRO_NAME)` to mark a specific keymap position as triggering `MACRO_NAME`
-  *
-  * The second usage is in the 'switch' statement in the `macroAction` function.
-  * That switch statement actually runs the code associated with a macro when
-  * a macro key is pressed.
-  */
+/* NamedCharShift setup
+ */
+NCS_KEYS(
+  (P_L_1_5,           Key_Quote,            Key_LeftParen),
+  (P_L_2_5,           Key_Comma,            Key_Semicolon),
+  (P_L_3_5,           Key_Minus,            Key_Underscore),
+  (P_R_1_5,           Key_DblQuote,         Key_LeftParen),
+  (P_R_2_5,           Key_Period,           Key_Colon),
+  (P_R_3_5,           Key_Question,         Key_Exclamation)
+)
 
+
+
+/* Macros
+ */
 enum {
   MACRO_VERSION_INFO,
   MACRO_ANY,
 };
 
-
-/** The Model 100's key layouts are defined as 'keymaps'. By default, there are three
-  * keymaps: The standard QWERTY keymap, the "Function layer" keymap and the "Numpad"
-  * keymap.
-  *
-  * Each keymap is defined as a list using the 'KEYMAP_STACKED' macro, built
-  * of first the left hand's layout, followed by the right hand's layout.
-  *
-  * Keymaps typically consist mostly of `Key_` definitions. There are many, many keys
-  * defined as part of the USB HID Keyboard specification. You can find the names
-  * (if not yet the explanations) for all the standard `Key_` defintions offered by
-  * Kaleidoscope in these files:
-  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/kaleidoscope/key_defs/keyboard.h
-  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/kaleidoscope/key_defs/consumerctl.h
-  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/kaleidoscope/key_defs/sysctl.h
-  *    https://github.com/keyboardio/Kaleidoscope/blob/master/src/kaleidoscope/key_defs/keymaps.h
-  *
-  * Additional things that should be documented here include
-  *   using ___ to let keypresses fall through to the previously active layer
-  *   using XXX to mark a keyswitch as 'blocked' on this layer
-  *   using ShiftToLayer() and LockLayer() keys to change the active keymap.
-  *   keeping NUM and FN consistent and accessible on all layers
-  *
-  * The PROG key is special, since it is how you indicate to the board that you
-  * want to flash the firmware. However, it can be remapped to a regular key.
-  * When the keyboard boots, it first looks to see whether the PROG key is held
-  * down; if it is, it simply awaits further flashing instructions. If it is
-  * not, it continues loading the rest of the firmware and the keyboard
-  * functions normally, with whatever binding you have set to PROG. More detail
-  * here: https://community.keyboard.io/t/how-the-prog-key-gets-you-into-the-bootloader/506/8
-  *
-  * The "keymaps" data structure is a list of the keymaps compiled into the firmware.
-  * The order of keymaps in the list is important, as the ShiftToLayer(#) and LockLayer(#)
-  * macros switch to key layers based on this list.
-  *
-  *
-
-  * A key defined as 'ShiftToLayer(FUNCTION)' will switch to FUNCTION while held.
-  * Similarly, a key defined as 'LockLayer(NUMPAD)' will switch to NUMPAD when tapped.
-  */
-
-/**
-  * Layers are "0-indexed" -- That is the first one is layer 0. The second one is layer 1.
-  * The third one is layer 2.
-  * This 'enum' lets us use names like QWERTY, FUNCTION, and NUMPAD in place of
-  * the numbers 0, 1 and 2.
-  *
-  */
-
+/* Layers
+ */
 enum {
   LAYER_PRIMARY,
-  LAYER_SHIFT,
   LAYER_FUNCTION,
   LAYER_CONTROL,
   LAYER_SUPER,
   LAYER_ALT,
-  LAYER_MOUSE
+  LAYER_MOUSE,
+  LAYER_HUB,
+
+  // Pseudo layer
+  FIRMWARE_LAYER_COUNT
 };  // layers
 
 
@@ -166,48 +127,48 @@ enum {
 
 KEYMAPS(
 
+  // [LAYER_PRIMARY] = KEYMAP_STACKED
+  // (CS(CS_KEY_L_0_0),    CS(CS_KEY_L_1_0),   CS(CS_KEY_L_2_0),   CS(CS_KEY_L_3_0),   CS(CS_KEY_L_4_0),   CS(CS_KEY_L_5_0),   CS(CS_KEY_L_6_0),
+  //  CS(CS_KEY_L_0_1),    CS(CS_KEY_L_1_1),   CS(CS_KEY_L_2_1),   CS(CS_KEY_L_3_1),   CS(CS_KEY_L_4_1),   CS(CS_KEY_L_5_1),   CS(CS_KEY_L_6_1),
+  //  CS(CS_KEY_L_0_2),    CS(CS_KEY_L_1_2),   CS(CS_KEY_L_2_2),   CS(CS_KEY_L_3_2),   CS(CS_KEY_L_4_2),   CS(CS_KEY_L_5_2),
+  //  CS(CS_KEY_L_0_3),    CS(CS_KEY_L_1_3),   CS(CS_KEY_L_2_3),   CS(CS_KEY_L_3_3),   CS(CS_KEY_L_4_3),   CS(CS_KEY_L_5_3),   CS(CS_KEY_L_6_2),
+  //  CS(CS_KEY_L_0_T),                        CS(CS_KEY_L_1_T),                       CS(CS_KEY_L_2_T),                       CS(CS_KEY_L_3_T),
+  //  CS(CS_KEY_L_0_P),
+
+  //  CS(CS_KEY_R_0_0),    CS(CS_KEY_R_1_0),   CS(CS_KEY_R_2_0),   CS(CS_KEY_R_3_0),   CS(CS_KEY_R_4_0),   CS(CS_KEY_R_5_0),   CS(CS_KEY_R_6_0),
+  //  CS(CS_KEY_R_0_1),    CS(CS_KEY_R_1_1),   CS(CS_KEY_R_2_1),   CS(CS_KEY_R_3_1),   CS(CS_KEY_R_4_1),   CS(CS_KEY_R_5_1),   CS(CS_KEY_R_6_1),
+  //                       CS(CS_KEY_R_1_2),   CS(CS_KEY_R_2_2),   CS(CS_KEY_R_3_2),   CS(CS_KEY_R_4_2),   CS(CS_KEY_R_5_2),   CS(CS_KEY_R_6_2),
+  //  CS(CS_KEY_R_0_2),    CS(CS_KEY_R_1_3),   CS(CS_KEY_R_2_3),   CS(CS_KEY_R_3_3),   CS(CS_KEY_R_4_3),   CS(CS_KEY_R_5_3),   CS(CS_KEY_R_6_3),
+  //  CS(CS_KEY_R_0_T),                        CS(CS_KEY_R_1_T),                       CS(CS_KEY_R_2_T),                       CS(CS_KEY_R_3_T),
+  //  CS(CS_KEY_R_0_P)),
+
   [LAYER_PRIMARY] = KEYMAP_STACKED
   (___,                 Key_1,              Key_2,              Key_3,              Key_4,              Key_5,              Key_PrintScreen,
-   ___,                 Key_B,              Key_Y,              Key_O,              Key_U,              Key_Quote,          ___,
-   Key_Tab,             Key_C,              Key_I,              Key_E,              Key_A,              Key_Comma,
-   Key_Escape,          Key_G,              Key_X,              Key_J,              Key_K,              Key_Minus,          ___,
+   ___,                 Key_B,              Key_Y,              Key_O,              Key_U,              NCS(P_L_1_5),       ___,
+   Key_Tab,             Key_C,              Key_I,              Key_E,              Key_A,              NCS(P_L_2_5),
+   Key_Escape,          Key_G,              Key_X,              Key_J,              Key_K,              NCS(P_L_3_5),       ___,
    MOD_LAYER_CONTROL,                       Key_Backspace,                          ___,                                    Key_Escape,
-   MOD_LAYER_SHIFT,
+   Key_LShift,
 
    ___,                 Key_6,              Key_7,              Key_8,              Key_9,              Key_0,              ___,
-   ___,                 Key_DblQuote,       Key_L,              Key_D,              Key_W,              Key_V,              Key_Z,
-                        Key_Period,         Key_H,              Key_T,              Key_S,              Key_N,              Key_Q,
-   ___,                 Key_Question,       Key_R,              Key_M,              Key_F,              Key_P,              ___,
+   ___,                 NCS(P_R_1_5),       Key_L,              Key_D,              Key_W,              Key_V,              Key_Z,
+                        NCS(P_R_2_5),       Key_H,              Key_T,              Key_S,              Key_N,              Key_Q,
+   ___,                 NCS(P_R_3_5),       Key_R,              Key_M,              Key_F,              Key_P,              ___,
    MOD_LAYER_SUPER,                         Key_Enter,                              Key_Spacebar,                           MOD_LAYER_ALT,
    ShiftToLayer(LAYER_FUNCTION)),
 
-  [LAYER_SHIFT] = KEYMAP_STACKED
-  (MOVE_PRIMARY,        ___,                ___,                ___,                ___,                ___,                ___,
-   ___,                 ___,                ___,                ___,                ___,                Key_LeftParen,      ___,
-   ___,                 ___,                ___,                ___,                ___,                Key_Semicolon,
-   ___,                 ___,                ___,                ___,                ___,                Key_Underscore,     ___,
-   MOD_LAYER_CONTROL,                       ___,                                    ___,                                    ___,
-   Key_LShift,
-
-   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
-   ___,                 Key_RightParen,     ___,                ___,                ___,                ___,                ___,
-                        Key_Colon,          ___,                ___,                ___,                ___,                ___,
-   ___,                 Key_Exclamation,    ___,                ___,                ___,                ___,                ___,
-   Key_LGui,                                ___,                                    ___,                                    Key_LAlt,
-   XXX),
-
   [LAYER_FUNCTION] = KEYMAP_STACKED
   (MOVE_PRIMARY,        ___,                ___,                ___,                ___,                ___,                ___,
-   ___,                 Key_Backtick,       Key_Pound,          Key_LessThan,       Key_GreaterThan,    Key_KeypadMultiply, ___,
+   ___,                 Key_Backtick,       Key_Pound,          Key_Carat,          Key_Dollar,         Key_KeypadMultiply, ___,
    ___,                 Key_Equals,         Key_At,             Key_Slash,          Key_Ampersand,      Key_KeypadAdd,
    ___,                 Key_Tilde,          Key_Percent,        Key_Backslash,      Key_Pipe,           Key_KeypadSubtract, ___,
    Key_LCtrl,                               ___,                                    ___,                                    ___,
    Key_LShift,
 
    ___,                 ___,                ___,                ___,                ___,                ___,                ___,
-   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
+   ___,                 ___,                Key_LSquareBracket, Key_RSquareBracket, Key_LCurlyBracket,  Key_RCurlyBracket,  ___,
                         ___,                Key_LeftArrow,      Key_DownArrow,      Key_UpArrow,        Key_RightArrow,     ___,
-   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
+   ___,                 ___,                Key_LessThan,       Key_GreaterThan,    ___,                ___,                ___,
    Key_LGui,                                ___,                                    ___,                                    Key_LAlt,
    XXX),
 
@@ -419,12 +380,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   EEPROMSettings,
   EEPROMKeymap,
 
-  // SpaceCadet can turn your shifts into parens on tap, while keeping them as
-  // Shifts when held. SpaceCadetConfig lets Chrysalis configure some aspects of
-  // the plugin.
-  SpaceCadet,
-  SpaceCadetConfig,
-
   // Focus allows bi-directional communication with the host, and is the
   // interface through which the keymap in EEPROM can be edited.
   Focus,
@@ -445,9 +400,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // LEDControl provides support for other LED modes
   LEDControl,
 
-  // LEDActiveLayerColorEffect sets the color based on the active layer
-  LEDActiveLayerColorEffect,
-
   // The LED Palette Theme plugin provides a shared palette for other plugins,
   // like Colormap below
   LEDPaletteTheme,
@@ -455,8 +407,20 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The Colormap effect makes it possible to set up per-layer colormaps
   ColormapEffect,
 
+  // Turns LEDs off after a configurable amount of idle time.
+  IdleLEDs,
+
   // The macros plugin adds support for macros
   Macros,
+
+  // SpaceCadet can turn your shifts into parens on tap, while keeping them as
+  // Shifts when held. SpaceCadetConfig lets Chrysalis configure some aspects of
+  // the plugin.
+  SpaceCadet,
+  SpaceCadetConfig,
+
+  // Char shift
+  NamedCharShift,
 
   // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
   // The MouseKeysConfig plugin lets Chrysalis configure some aspects of the
@@ -491,50 +455,34 @@ KALEIDOSCOPE_INIT_PLUGINS(
   EscapeOneShot,
   EscapeOneShotConfig,
 
-  // Turns LEDs off after a configurable amount of idle time.
-  IdleLEDs,
-  PersistentIdleLEDs,
-
-  // Enables dynamic, Chrysalis-editable macros.
-  DynamicMacros,
-
   // The FirmwareVersion plugin lets Chrysalis query the version of the firmware
   // programmatically.
-  FirmwareVersion,
-
-  // The LayerNames plugin allows Chrysalis to display - and edit - custom layer
-  // names, to be shown instead of the default indexes.
-  LayerNames,
-
-  // Enables setting, saving (via Chrysalis), and restoring (on boot) the
-  // default LED mode.
-  DefaultLEDModeConfig,
-
-  // Enables controlling (and saving) the brightness of the LEDs via Focus.
-  LEDBrightnessConfig,
-
-  // Enables the GeminiPR Stenography protocol. Unused by default, but with the
-  // plugin enabled, it becomes configurable - and then usable - via Chrysalis.
-  GeminiPR);
+  FirmwareVersion);
 
 /** The 'setup' function is one of the two standard Arduino sketch functions.
  * It's called when your keyboard first powers up. This is where you set up
  * Kaleidoscope and any plugins.
  */
 void setup() {
-  // Setup the layer colors
-  static const cRGB layerColormap[] PROGMEM = {
-    HRGB(0xBD05F2), // Primary
-    HRGB(0x540695), // Shift
-    HRGB(0x069531), // Function
-    HRGB(0x0300FF), // Control
-    HRGB(0x00A4B5), // Super
-    HRGB(0x76462A), // Alt
-    HRGB(0xAAA6CA), // Mouse
-    };
 
   // First, call Kaleidoscope's internal setup function
   Kaleidoscope.setup();
+
+  // To make the keymap editable without flashing new firmware, we store
+  // additional layers in EEPROM. For now, we reserve space for eight layers. If
+  // one wants to use these layers, just set the default layer to one in EEPROM,
+  // by using the `settings.defaultLayer` Focus command, or by using the
+  // `keymap.onlyCustom` command to use EEPROM layers only.
+  // EEPROMKeymap.setup(16);
+
+  // We need to tell the Colormap plugin how many layers we want to have custom
+  // maps for. To make things simple, we set it to eight layers, which is how
+  // many editable layers we have (see above).
+  // ColormapEffect.max_layers(16 + FIRMWARE_LAYER_COUNT);
+
+  // Set the hue of the boot greeting effect to something that will result in a
+  // nice green color.
+  BootGreetingEffect.hue = 85;
 
   // Set the action key the test mode should listen for to Left Fn
   HardwareTestMode.setActionKey(R3C6);
@@ -544,7 +492,7 @@ void setup() {
   // no configuration exists.
   SpaceCadetConfig.disableSpaceCadetIfUnconfigured();
 
-  LEDActiveLayerColorEffect.setColormap(layerColormap);
+  // LEDActiveLayerColorEffect.setColormap(layerColormap);
 
   Layer.move(LAYER_PRIMARY);
 }

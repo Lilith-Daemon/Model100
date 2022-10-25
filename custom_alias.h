@@ -37,11 +37,17 @@
 // Move layers
 #define MOVE_PRIMARY          MoveToLayer(LAYER_PRIMARY)
 
-// Mod shift
-#define MOD_LAYER_SHIFT       modLayerKey(Key_LShift, LAYER_SHIFT)
+// Mod layers
 #define MOD_LAYER_CONTROL     modLayerKey(Key_LCtrl,  LAYER_CONTROL)
 #define MOD_LAYER_SUPER       modLayerKey(Key_LGui,   LAYER_SUPER)
 #define MOD_LAYER_ALT         modLayerKey(Key_LAlt,   LAYER_ALT)
 
 // Colors
 #define HRGB(h)               CRGB((h & 0xFF0000)>>16, (h & 0x00FF00)>>8, h & 0x0000FF)
+
+// Me being lazy
+#define YYY                   XXX
+
+// Rename to fit 18 char
+#define Key_LCurlyBracket     LSHIFT(Key_LeftBracket)
+#define Key_RCurlyBracket     LSHIFT(Key_RightBracket)
