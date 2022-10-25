@@ -4,6 +4,8 @@
 
 export KALEIDOSCOPE_LOCAL_LIB_DIR := $(HOME)/repos/keyboardio/Plugins
 
+export LOCAL_CFLAGS ?= -ftrack-macro-expansion=0
+
 ifneq ($(KALEIDOSCOPE_DIR),)
 search_path += $(KALEIDOSCOPE_DIR)
 endif
