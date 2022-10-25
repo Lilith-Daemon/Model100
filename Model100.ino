@@ -29,9 +29,8 @@
 // Support for controlling the keyboard's LEDs
 #include "Kaleidoscope-LEDControl.h"
 
-// Support for the "Boot greeting" effect, which pulses the 'LED' button for 10s
-// when the keyboard is connected to a computer (or that computer is powered on)
-#include "Kaleidoscope-LEDEffect-BootGreeting.h"
+// Support for LED modes that set all LEDs to a single color
+#include "Kaleidoscope-LED-ActiveLayerColor.h"
 
 // Support for shared palettes for other plugins, like Colormap below
 #include "Kaleidoscope-LED-Palette-Theme.h"
@@ -400,6 +399,9 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // LEDControl provides support for other LED modes
   LEDControl,
 
+  // LEDActiveLayerColorEffect sets the color based on the active layer
+  LEDActiveLayerColorEffect,
+
   // The LED Palette Theme plugin provides a shared palette for other plugins,
   // like Colormap below
   LEDPaletteTheme,
@@ -464,6 +466,16 @@ KALEIDOSCOPE_INIT_PLUGINS(
  * Kaleidoscope and any plugins.
  */
 void setup() {
+  // Setup the layer colors
+  static const cRGB layerColormap[] PROGMEM = {
+    HRGB(0xBD05F2), // Primary
+    HRGB(0x540695), // Shift
+    HRGB(0x069531), // Function
+    HRGB(0x0300FF), // Control
+    HRGB(0x00A4B5), // Super
+    HRGB(0x76462A), // Alt
+    HRGB(0xAAA6CA), // Mouse
+    };
 
   // First, call Kaleidoscope's internal setup function
   Kaleidoscope.setup();
@@ -480,10 +492,6 @@ void setup() {
   // many editable layers we have (see above).
   // ColormapEffect.max_layers(16 + FIRMWARE_LAYER_COUNT);
 
-  // Set the hue of the boot greeting effect to something that will result in a
-  // nice green color.
-  BootGreetingEffect.hue = 85;
-
   // Set the action key the test mode should listen for to Left Fn
   HardwareTestMode.setActionKey(R3C6);
 
@@ -492,7 +500,7 @@ void setup() {
   // no configuration exists.
   SpaceCadetConfig.disableSpaceCadetIfUnconfigured();
 
-  // LEDActiveLayerColorEffect.setColormap(layerColormap);
+  LEDActiveLayerColorEffect.setColormap(layerColormap);
 
   Layer.move(LAYER_PRIMARY);
 }
