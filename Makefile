@@ -2,7 +2,7 @@
 # required to build the example
 
 
-
+export KALEIDOSCOPE_LOCAL_LIB_DIR := $(HOME)/repos/keyboardio/Plugins
 
 ifneq ($(KALEIDOSCOPE_DIR),)
 search_path += $(KALEIDOSCOPE_DIR)

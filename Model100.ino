@@ -91,7 +91,17 @@ NCS_KEYS(
   (P_L_3_5,           Key_Minus,            Key_Underscore),
   (P_R_1_5,           Key_DblQuote,         Key_LeftParen),
   (P_R_2_5,           Key_Period,           Key_Colon),
-  (P_R_3_5,           Key_Question,         Key_Exclamation)
+  (P_R_3_5,           Key_Question,         Key_Exclamation),
+  (KEY_1_F1,          Key_1,                Key_F1),
+  (KEY_2_F2,          Key_2,                Key_F2),
+  (KEY_3_F3,          Key_3,                Key_F3),
+  (KEY_4_F4,          Key_4,                Key_F4),
+  (KEY_5_F5,          Key_5,                Key_F5),
+  (KEY_6_F6,          Key_6,                Key_F6),
+  (KEY_7_F7,          Key_7,                Key_F7),
+  (KEY_8_F8,          Key_8,                Key_F8),
+  (KEY_9_F9,          Key_9,                Key_F9),
+  (KEY_0_F10,         Key_0,                Key_F10)
 )
 
 
@@ -126,30 +136,15 @@ enum {
 
 KEYMAPS(
 
-  // [LAYER_PRIMARY] = KEYMAP_STACKED
-  // (CS(CS_KEY_L_0_0),    CS(CS_KEY_L_1_0),   CS(CS_KEY_L_2_0),   CS(CS_KEY_L_3_0),   CS(CS_KEY_L_4_0),   CS(CS_KEY_L_5_0),   CS(CS_KEY_L_6_0),
-  //  CS(CS_KEY_L_0_1),    CS(CS_KEY_L_1_1),   CS(CS_KEY_L_2_1),   CS(CS_KEY_L_3_1),   CS(CS_KEY_L_4_1),   CS(CS_KEY_L_5_1),   CS(CS_KEY_L_6_1),
-  //  CS(CS_KEY_L_0_2),    CS(CS_KEY_L_1_2),   CS(CS_KEY_L_2_2),   CS(CS_KEY_L_3_2),   CS(CS_KEY_L_4_2),   CS(CS_KEY_L_5_2),
-  //  CS(CS_KEY_L_0_3),    CS(CS_KEY_L_1_3),   CS(CS_KEY_L_2_3),   CS(CS_KEY_L_3_3),   CS(CS_KEY_L_4_3),   CS(CS_KEY_L_5_3),   CS(CS_KEY_L_6_2),
-  //  CS(CS_KEY_L_0_T),                        CS(CS_KEY_L_1_T),                       CS(CS_KEY_L_2_T),                       CS(CS_KEY_L_3_T),
-  //  CS(CS_KEY_L_0_P),
-
-  //  CS(CS_KEY_R_0_0),    CS(CS_KEY_R_1_0),   CS(CS_KEY_R_2_0),   CS(CS_KEY_R_3_0),   CS(CS_KEY_R_4_0),   CS(CS_KEY_R_5_0),   CS(CS_KEY_R_6_0),
-  //  CS(CS_KEY_R_0_1),    CS(CS_KEY_R_1_1),   CS(CS_KEY_R_2_1),   CS(CS_KEY_R_3_1),   CS(CS_KEY_R_4_1),   CS(CS_KEY_R_5_1),   CS(CS_KEY_R_6_1),
-  //                       CS(CS_KEY_R_1_2),   CS(CS_KEY_R_2_2),   CS(CS_KEY_R_3_2),   CS(CS_KEY_R_4_2),   CS(CS_KEY_R_5_2),   CS(CS_KEY_R_6_2),
-  //  CS(CS_KEY_R_0_2),    CS(CS_KEY_R_1_3),   CS(CS_KEY_R_2_3),   CS(CS_KEY_R_3_3),   CS(CS_KEY_R_4_3),   CS(CS_KEY_R_5_3),   CS(CS_KEY_R_6_3),
-  //  CS(CS_KEY_R_0_T),                        CS(CS_KEY_R_1_T),                       CS(CS_KEY_R_2_T),                       CS(CS_KEY_R_3_T),
-  //  CS(CS_KEY_R_0_P)),
-
   [LAYER_PRIMARY] = KEYMAP_STACKED
-  (___,                 Key_1,              Key_2,              Key_3,              Key_4,              Key_5,              Key_PrintScreen,
+  (___,                 NCS(KEY_1_F1),      NCS(KEY_2_F2),      NCS(KEY_3_F3),      NCS(KEY_4_F4),      NCS(KEY_5_F5),      Key_PrintScreen,
    ___,                 Key_B,              Key_Y,              Key_O,              Key_U,              NCS(P_L_1_5),       ___,
    Key_Tab,             Key_C,              Key_I,              Key_E,              Key_A,              NCS(P_L_2_5),
    Key_Escape,          Key_G,              Key_X,              Key_J,              Key_K,              NCS(P_L_3_5),       ___,
    MOD_LAYER_CONTROL,                       Key_Backspace,                          ___,                                    Key_Escape,
    Key_LShift,
 
-   ___,                 Key_6,              Key_7,              Key_8,              Key_9,              Key_0,              ___,
+   ___,                 NCS(KEY_6_F6),      NCS(KEY_7_F7),      NCS(KEY_8_F8),      NCS(KEY_9_F9),      NCS(KEY_0_F10),     ___,
    ___,                 NCS(P_R_1_5),       Key_L,              Key_D,              Key_W,              Key_V,              Key_Z,
                         NCS(P_R_2_5),       Key_H,              Key_T,              Key_S,              Key_N,              Key_Q,
    ___,                 NCS(P_R_3_5),       Key_R,              Key_M,              Key_F,              Key_P,              ___,
@@ -165,9 +160,9 @@ KEYMAPS(
    Key_LShift,
 
    ___,                 ___,                ___,                ___,                ___,                ___,                ___,
-   ___,                 ___,                Key_LSquareBracket, Key_RSquareBracket, Key_LCurlyBracket,  Key_RCurlyBracket,  ___,
+   ___,                 ___,                Key_LSquareBracket, Key_RSquareBracket, ___,                ___,                ___,
                         ___,                Key_LeftArrow,      Key_DownArrow,      Key_UpArrow,        Key_RightArrow,     ___,
-   ___,                 ___,                Key_LessThan,       Key_GreaterThan,    ___,                ___,                ___,
+   ___,                 ___,                Key_LessThan,       Key_GreaterThan,    Key_LCurlyBracket,  Key_RCurlyBracket,  ___,
    Key_LGui,                                ___,                                    ___,                                    Key_LAlt,
    XXX),
 
