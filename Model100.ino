@@ -81,7 +81,7 @@
 // Custom aliases for my sketches
 #include "custom_alias.h"
 #include "const.h"
-#include "Lilith-NamedCharShift.h"
+#include "Lilith-CharShift.h"
 
 /* NamedCharShift setup
  */
@@ -89,7 +89,7 @@ NCS_KEYS(
   (P_L_1_5,           Key_Quote,            Key_LeftParen),
   (P_L_2_5,           Key_Comma,            Key_Semicolon),
   (P_L_3_5,           Key_Minus,            Key_Underscore),
-  (P_R_1_5,           Key_DblQuote,         Key_LeftParen),
+  (P_R_1_5,           Key_DblQuote,         Key_RightParen),
   (P_R_2_5,           Key_Period,           Key_Colon),
   (P_R_3_5,           Key_Question,         Key_Exclamation),
   (KEY_1_F1,          Key_1,                Key_F1),
@@ -162,7 +162,7 @@ KEYMAPS(
    ___,                 ___,                ___,                ___,                ___,                ___,                ___,
    ___,                 ___,                Key_LSquareBracket, Key_RSquareBracket, ___,                ___,                ___,
                         ___,                Key_LeftArrow,      Key_DownArrow,      Key_UpArrow,        Key_RightArrow,     ___,
-   ___,                 ___,                Key_LessThan,       Key_GreaterThan,    Key_LCurlyBracket,  Key_RCurlyBracket,  ___,
+   ___,                 ___,                Key_LCurlyBracket,  Key_RCurlyBracket,  Key_LessThan,       Key_GreaterThan,    ___,
    Key_LGui,                                ___,                                    ___,                                    Key_LAlt,
    XXX),
 
@@ -179,7 +179,7 @@ KEYMAPS(
                         ___,                Key_LeftArrow,      Key_DownArrow,      Key_UpArrow,        Key_RightArrow,     ___,
    ___,                 ___,                ___,                ___,                ___,                ___,                ___,
    Key_LGui,                                ___,                                    ___,                                    Key_LAlt,
-   XXX),
+   ShiftToLayer(LAYER_FUNCTION))),
 
   [LAYER_SUPER] = KEYMAP_STACKED
   (MOVE_PRIMARY,        ___,                ___,                ___,                ___,                ___,                ___,
@@ -417,7 +417,7 @@ KALEIDOSCOPE_INIT_PLUGINS(
   SpaceCadetConfig,
 
   // Char shift
-  NamedCharShift,
+  CharShift,
 
   // The MouseKeys plugin lets you add keys to your keymap which move the mouse.
   // The MouseKeysConfig plugin lets Chrysalis configure some aspects of the
