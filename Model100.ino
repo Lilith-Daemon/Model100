@@ -171,7 +171,7 @@ KEYMAPS(
    Key_H,               Key_Q,              Key_W,              Key_E,              Key_R,              Key_T,              ___,
    Key_P,               Key_A,              Key_S,              Key_D,              Key_F,              Key_G,
    ___,                 Key_Z,              Key_X,              Key_C,              Key_V,              Key_B,              ___,
-   Key_LCtrl,                               ___,                                    ___,                                    ___,
+   MOD_LAYER_CONTROL,                       ___,                                    ___,                                    ___,
    Key_LShift,
 
    ___,                 ___,                ___,                ___,                ___,                ___,                ___,
@@ -179,7 +179,7 @@ KEYMAPS(
                         ___,                Key_LeftArrow,      Key_DownArrow,      Key_UpArrow,        Key_RightArrow,     ___,
    ___,                 ___,                ___,                ___,                ___,                ___,                ___,
    Key_LGui,                                ___,                                    ___,                                    Key_LAlt,
-   ShiftToLayer(LAYER_FUNCTION))),
+   XXX),
 
   [LAYER_SUPER] = KEYMAP_STACKED
   (MOVE_PRIMARY,        ___,                ___,                ___,                ___,                ___,                ___,
