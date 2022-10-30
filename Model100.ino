@@ -69,9 +69,6 @@
 // Support for dynamic, Chrysalis-editable macros
 #include "Kaleidoscope-DynamicMacros.h"
 
-// Support for SpaceCadet keys
-#include "Kaleidoscope-SpaceCadet.h"
-
 // Support for editable layer names
 #include "Kaleidoscope-LayerNames.h"
 
@@ -82,28 +79,6 @@
 #include "custom_alias.h"
 #include "const.h"
 #include "Lilith-CharShift.h"
-
-/* NamedCharShift setup
- */
-NCS_KEYS(
-  (P_L_1_5,           Key_Quote,            Key_LeftParen),
-  (P_L_2_5,           Key_Comma,            Key_Semicolon),
-  (P_L_3_5,           Key_Minus,            Key_Underscore),
-  (P_R_1_5,           Key_DblQuote,         Key_RightParen),
-  (P_R_2_5,           Key_Period,           Key_Colon),
-  (P_R_3_5,           Key_Question,         Key_Exclamation),
-  (KEY_1_F1,          Key_1,                Key_F1),
-  (KEY_2_F2,          Key_2,                Key_F2),
-  (KEY_3_F3,          Key_3,                Key_F3),
-  (KEY_4_F4,          Key_4,                Key_F4),
-  (KEY_5_F5,          Key_5,                Key_F5),
-  (KEY_6_F6,          Key_6,                Key_F6),
-  (KEY_7_F7,          Key_7,                Key_F7),
-  (KEY_8_F8,          Key_8,                Key_F8),
-  (KEY_9_F9,          Key_9,                Key_F9),
-  (KEY_0_F10,         Key_0,                Key_F10)
-)
-
 
 
 /* Macros
@@ -125,7 +100,23 @@ enum {
   LAYER_HUB,
 
   // Pseudo layer
-  FIRMWARE_LAYER_COUNT
+  FIRMWARE_LAYER_COUNT,
+  EEPROM_LAYER_01 = FIRMWARE_LAYER_COUNT,
+  EEPROM_LAYER_02,
+  EEPROM_LAYER_03,
+  EEPROM_LAYER_04,
+  EEPROM_LAYER_05,
+  EEPROM_LAYER_06,
+  EEPROM_LAYER_07,
+  EEPROM_LAYER_08,
+  EEPROM_LAYER_09,
+  EEPROM_LAYER_10,
+  EEPROM_LAYER_11,
+  EEPROM_LAYER_12,
+  EEPROM_LAYER_13,
+  EEPROM_LAYER_14,
+  EEPROM_LAYER_15,
+  EEPROM_LAYER_16
 };  // layers
 
 
@@ -134,6 +125,29 @@ enum {
  */
 // clang-format off
 
+
+/* NamedCharShift setup
+ */
+NCS_KEYS(
+  (P_L_1_5,           Key_Quote,            Key_LeftParen),
+  (P_L_2_5,           Key_Comma,            Key_Semicolon),
+  (P_L_3_5,           Key_Minus,            Key_Underscore),
+  (P_R_1_5,           Key_DblQuote,         Key_RightParen),
+  (P_R_2_5,           Key_Period,           Key_Colon),
+  (P_R_3_5,           Key_Question,         Key_Exclamation),
+  (KEY_1_F1,          Key_1,                Key_F1),
+  (KEY_2_F2,          Key_2,                Key_F2),
+  (KEY_3_F3,          Key_3,                Key_F3),
+  (KEY_4_F4,          Key_4,                Key_F4),
+  (KEY_5_F5,          Key_5,                Key_F5),
+  (KEY_6_F6,          Key_6,                Key_F6),
+  (KEY_7_F7,          Key_7,                Key_F7),
+  (KEY_8_F8,          Key_8,                Key_F8),
+  (KEY_9_F9,          Key_9,                Key_F9),
+  (KEY_0_F10,         Key_0,                Key_F10),
+  (KEY_ESC_HUB,       Key_Escape,           ShiftToLayer(LAYER_HUB))
+)
+
 KEYMAPS(
 
   [LAYER_PRIMARY] = KEYMAP_STACKED
@@ -141,7 +155,7 @@ KEYMAPS(
    ___,                 Key_B,              Key_Y,              Key_O,              Key_U,              NCS(P_L_1_5),       ___,
    Key_Tab,             Key_C,              Key_I,              Key_E,              Key_A,              NCS(P_L_2_5),
    Key_Escape,          Key_G,              Key_X,              Key_J,              Key_K,              NCS(P_L_3_5),       ___,
-   MOD_LAYER_CONTROL,                       Key_Backspace,                          ___,                                    Key_Escape,
+   MOD_LAYER_CONTROL,                       Key_Backspace,                          LockLayer(LAYER_MOUSE),                 NCS(KEY_ESC_HUB),
    Key_LShift,
 
    ___,                 NCS(KEY_6_F6),      NCS(KEY_7_F7),      NCS(KEY_8_F8),      NCS(KEY_9_F9),      NCS(KEY_0_F10),     ___,
@@ -212,19 +226,51 @@ KEYMAPS(
    XXX),
 
   [LAYER_MOUSE] = KEYMAP_STACKED
-  (MOVE_PRIMARY,        ___,                ___,                ___,                ___,                ___,                ___,
-   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
-   ___,                 ___,                ___,                ___,                ___,                ___,
-   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
-   Key_LCtrl,                               ___,                                    ___,                                    ___,
+  (MOVE_PRIMARY,        XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,
+   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+   Key_LCtrl,                               XXX,                                    XXX,                                    XXX,
    Key_LShift,
 
-   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
-   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
-                        ___,                ___,                ___,                ___,                ___,                ___,
-   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
-   Key_LGui,                                ___,                                    ___,                                    Key_LAlt,
+   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+                        XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+   Key_LGui,                                XXX,                                    XXX,                                    Key_LAlt,
    XXX),
+
+  [LAYER_HUB] = KEYMAP_STACKED
+  (MOVE_PRIMARY,        MOVE_TO_EEPROM(01), MOVE_TO_EEPROM(02), MOVE_TO_EEPROM(03), MOVE_TO_EEPROM(04), XXX,                XXX,
+   XXX,                 MOVE_TO_EEPROM(05), MOVE_TO_EEPROM(06), MOVE_TO_EEPROM(07), MOVE_TO_EEPROM(08), XXX,                XXX,
+   XXX,                 MOVE_TO_EEPROM(09), MOVE_TO_EEPROM(10), MOVE_TO_EEPROM(11), MOVE_TO_EEPROM(12), XXX,
+   XXX,                 MOVE_TO_EEPROM(13), MOVE_TO_EEPROM(14), MOVE_TO_EEPROM(15), MOVE_TO_EEPROM(16), XXX,                XXX,
+   XXX,                                     XXX,                                    XXX,                                    XXX,
+   XXX,
+
+   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+                        XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+   XXX,                                     XXX,                                    XXX,                                    XXX,
+   XXX),
+
+   [EEPROM_LAYER_01] = LAYER_BLANK,
+   [EEPROM_LAYER_02] = LAYER_BLANK,
+   [EEPROM_LAYER_03] = LAYER_BLANK,
+   [EEPROM_LAYER_04] = LAYER_BLANK,
+   [EEPROM_LAYER_05] = LAYER_BLANK,
+   [EEPROM_LAYER_06] = LAYER_BLANK,
+   [EEPROM_LAYER_07] = LAYER_BLANK,
+   [EEPROM_LAYER_08] = LAYER_BLANK,
+   [EEPROM_LAYER_09] = LAYER_BLANK,
+   [EEPROM_LAYER_10] = LAYER_BLANK,
+   [EEPROM_LAYER_11] = LAYER_BLANK,
+   [EEPROM_LAYER_12] = LAYER_BLANK,
+   [EEPROM_LAYER_13] = LAYER_BLANK,
+   [EEPROM_LAYER_14] = LAYER_BLANK,
+   [EEPROM_LAYER_15] = LAYER_BLANK,
+   [EEPROM_LAYER_16] = LAYER_BLANK
 
 ) // KEYMAPS(
 
@@ -410,12 +456,6 @@ KALEIDOSCOPE_INIT_PLUGINS(
   // The macros plugin adds support for macros
   Macros,
 
-  // SpaceCadet can turn your shifts into parens on tap, while keeping them as
-  // Shifts when held. SpaceCadetConfig lets Chrysalis configure some aspects of
-  // the plugin.
-  SpaceCadet,
-  SpaceCadetConfig,
-
   // Char shift
   CharShift,
 
@@ -463,11 +503,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
 void setup() {
   // Setup the layer colors
   static const cRGB layerColormap[] PROGMEM = {
-    HRGB(0xBD05F2), // Primary
-    HRGB(0x540695), // Shift
-    HRGB(0x069531), // Function
+    HRGB(0xc41ef3), // Primary
+    HRGB(0x51b56f), // Function
     HRGB(0x0300FF), // Control
-    HRGB(0x00A4B5), // Super
+    HRGB(0x1aadbc), // Super
     HRGB(0x76462A), // Alt
     HRGB(0xAAA6CA), // Mouse
     };
@@ -480,20 +519,19 @@ void setup() {
   // one wants to use these layers, just set the default layer to one in EEPROM,
   // by using the `settings.defaultLayer` Focus command, or by using the
   // `keymap.onlyCustom` command to use EEPROM layers only.
-  // EEPROMKeymap.setup(16);
+  EEPROMKeymap.setup(16 + FIRMWARE_LAYER_COUNT);
 
   // We need to tell the Colormap plugin how many layers we want to have custom
   // maps for. To make things simple, we set it to eight layers, which is how
   // many editable layers we have (see above).
-  // ColormapEffect.max_layers(16 + FIRMWARE_LAYER_COUNT);
+  ColormapEffect.max_layers(16 + FIRMWARE_LAYER_COUNT);
+
+  // For Dynamic Macros, we need to reserve storage space for the editable
+  // macros. A kilobyte is a reasonable default.
+  DynamicMacros.reserve_storage(1024);
 
   // Set the action key the test mode should listen for to Left Fn
   HardwareTestMode.setActionKey(R3C6);
-
-  // To avoid any surprises, SpaceCadet is turned off by default. However, it
-  // can be permanently enabled via Chrysalis, so we should only disable it if
-  // no configuration exists.
-  SpaceCadetConfig.disableSpaceCadetIfUnconfigured();
 
   LEDActiveLayerColorEffect.setColormap(layerColormap);
 
