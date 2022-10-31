@@ -16,6 +16,9 @@
 
 #pragma once
 
+// The Kaleidoscope core
+#include "Kaleidoscope.h"
+
 // Shifted keys
 #define Key_Colon             LSHIFT(Key_Semicolon)
 #define Key_DblQuote          LSHIFT(Key_Quote)
@@ -38,7 +41,7 @@
 #define MOVE_PRIMARY          MoveToLayer(LAYER_PRIMARY)
 
 //
-#define MOVE_TO_EEPROM(x)     LockLayer(EEPROM_LAYER_##x)
+#define LOCK_TO_EEPROM(x)     LockLayer(EEPROM_LAYER_##x)
 
 // Mod layers
 #define MOD_LAYER_CONTROL     modLayerKey(Key_LCtrl,  LAYER_CONTROL)
@@ -55,7 +58,7 @@
 #define Key_LCurlyBracket     LSHIFT(Key_LeftBracket)
 #define Key_RCurlyBracket     LSHIFT(Key_RightBracket)
 
-//
+// A blank fully blocked layer used to initialize the EEPROM layers
 #define LAYER_BLANK KEYMAP_STACKED                                                                                                  \
   (MOVE_PRIMARY,        XXX,                XXX,                XXX,                XXX,                XXX,                XXX,    \
    XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,    \

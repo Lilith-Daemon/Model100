@@ -14,4 +14,6 @@
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#define EEPROM_LAYER_COUNT 16
+#pragma once
+
+#define EEPROM_LAYER_COUNT 20
