@@ -59,16 +59,10 @@
 #define Key_RCurlyBracket     LSHIFT(Key_RightBracket)
 
 // A blank fully blocked layer used to initialize the EEPROM layers
-#define LAYER_BLANK KEYMAP_STACKED                                                                                                  \
-  (MOVE_PRIMARY,        XXX,                XXX,                XXX,                XXX,                XXX,                XXX,    \
-   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,    \
-   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                        \
-   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,    \
-   XXX,                                     XXX,                                    XXX,                                    XXX,    \
-   XXX,                                                                                                                             \
-   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,    \
-   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,    \
-                        XXX,                XXX,                XXX,                XXX,                XXX,                XXX,    \
-   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,    \
-   XXX,                                     XXX,                                    XXX,                                    XXX,    \
-   XXX)
+#define LAYER_FILL(prog,x) (prog, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x, x)
+
+#define KEYMAP_LAYER_FILL(prog, x) KEYMAP_STACKED LAYER_FILL(prog,x)
+
+#define LAYER_BLOCK KEYMAP_LAYER_FILL(MOVE_PRIMARY, XXX)
+
+#define CUSTOM_COLOR_MAP_LAYER(index) COLORMAP_STACKED LAYER_FILL(index, index)

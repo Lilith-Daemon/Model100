@@ -98,7 +98,8 @@ enum {
   EEPROM_LAYER_END_MARKER,
 
   // Layer Aliases
-  LAYER_RPG_MAKER_REBORN = EEPROM_LAYER_01
+  LAYER_RPG_MAKER_REBORN = EEPROM_LAYER_01,
+  LAYER_BLOCK_MOD_KEYS = EEPROM_LAYER_02
 };  // layers
 
 #define TOTAL_LAYERS FIRMWARE_LAYER_COUNT + EEPROM_LAYER_COUNT
@@ -238,7 +239,7 @@ KEYMAPS(
    XXX),
 
   [LAYER_RPG_MAKER_REBORN] = KEYMAP_STACKED
-   (MOVE_PRIMARY,       XXX,                XXX,                XXX,                XXX,                XXX,                Key_F12,
+  (MOVE_PRIMARY,       XXX,                XXX,                XXX,                XXX,                XXX,                Key_F12,
    XXX,                 XXX,                Key_Q,              Key_UpArrow,        Key_W,              XXX,                XXX,
    XXX,                 Key_X,              Key_LArrow,         Key_DnArrow,        Key_RArrow,         XXX,
    XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
@@ -251,27 +252,90 @@ KEYMAPS(
    XXX,                                     XXX,                                    XXX,                                    XXX,
    XXX),
 
-  [EEPROM_LAYER_02] = LAYER_BLANK,
-  [EEPROM_LAYER_03] = LAYER_BLANK,
-  [EEPROM_LAYER_04] = LAYER_BLANK,
-  [EEPROM_LAYER_05] = LAYER_BLANK,
-  [EEPROM_LAYER_06] = LAYER_BLANK,
-  [EEPROM_LAYER_07] = LAYER_BLANK,
-  [EEPROM_LAYER_08] = LAYER_BLANK,
-  [EEPROM_LAYER_09] = LAYER_BLANK,
-  [EEPROM_LAYER_10] = LAYER_BLANK,
-  [EEPROM_LAYER_11] = LAYER_BLANK,
-  [EEPROM_LAYER_12] = LAYER_BLANK,
-  [EEPROM_LAYER_13] = LAYER_BLANK,
-  [EEPROM_LAYER_14] = LAYER_BLANK,
-  [EEPROM_LAYER_15] = LAYER_BLANK,
-  [EEPROM_LAYER_16] = LAYER_BLANK,
-  [EEPROM_LAYER_17] = LAYER_BLANK,
-  [EEPROM_LAYER_18] = LAYER_BLANK,
-  [EEPROM_LAYER_19] = LAYER_BLANK,
-  [EEPROM_LAYER_20] = LAYER_BLANK
+  [LAYER_BLOCK_MOD_KEYS] = KEYMAP_STACKED
+  (MOVE_PRIMARY,        ___,                ___,                ___,                ___,                ___,                ___,
+   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
+   ___,                 ___,                ___,                ___,                ___,                ___,
+   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
+   Key_LCtrl,                               ___,                                    ___,                                    ___,
+   Key_LShift,
+
+   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
+   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
+                        ___,                ___,                ___,                ___,                ___,                ___,
+   ___,                 ___,                ___,                ___,                ___,                ___,                ___,
+   Key_LGui,                                ___,                                    ___,                                    Key_LAlt,
+   XXX),
+  [EEPROM_LAYER_03] = LAYER_BLOCK,
+  [EEPROM_LAYER_04] = LAYER_BLOCK,
+  [EEPROM_LAYER_05] = LAYER_BLOCK,
+  [EEPROM_LAYER_06] = LAYER_BLOCK,
+  [EEPROM_LAYER_07] = LAYER_BLOCK,
+  [EEPROM_LAYER_08] = LAYER_BLOCK,
+  [EEPROM_LAYER_09] = LAYER_BLOCK,
+  [EEPROM_LAYER_10] = LAYER_BLOCK,
+  [EEPROM_LAYER_11] = LAYER_BLOCK,
+  [EEPROM_LAYER_12] = LAYER_BLOCK,
+  [EEPROM_LAYER_13] = LAYER_BLOCK,
+  [EEPROM_LAYER_14] = LAYER_BLOCK,
+  [EEPROM_LAYER_15] = LAYER_BLOCK,
+  [EEPROM_LAYER_16] = LAYER_BLOCK,
+  [EEPROM_LAYER_17] = LAYER_BLOCK,
+  [EEPROM_LAYER_18] = LAYER_BLOCK,
+  [EEPROM_LAYER_19] = LAYER_BLOCK,
+  [EEPROM_LAYER_20] = LAYER_BLOCK
 
 ) // KEYMAPS(
+
+COLORMAPS(
+  [LAYER_PRIMARY]                 = CUSTOM_COLOR_MAP_LAYER(0),
+  [LAYER_FUNCTION]                = CUSTOM_COLOR_MAP_LAYER(0),
+  [LAYER_CONTROL]                 = CUSTOM_COLOR_MAP_LAYER(0),
+  [LAYER_SUPER]                   = CUSTOM_COLOR_MAP_LAYER(0),
+  [LAYER_ALT]                     = CUSTOM_COLOR_MAP_LAYER(0),
+  [LAYER_MOUSE]                   = CUSTOM_COLOR_MAP_LAYER(0),
+  [LAYER_HUB]                     = COLORMAP_STACKED
+  (0,                 0,                0,                0,                0,                0,                0,
+   0,                 1,                2,                3,                4,                0,                0,
+   0,                 5,                6,                7,                8,                0,
+   0,                 9,               10,               11,               12,                0,                0,
+   0,                                   0,                                  0,                                  0,
+   0,
+
+   0,                 0,                0,                0,                0,                0,                0,
+   0,                 0,                0,                0,                0,                0,                0,
+                      0,                0,                0,                0,                0,                0,
+   0,                 0,                0,                0,                0,                0,                0,
+   0,                                   0,                                  0,                                  0,
+   0),
+  [LAYER_RPG_MAKER_REBORN]        = CUSTOM_COLOR_MAP_LAYER(1),
+  [LAYER_BLOCK_MOD_KEYS]          = CUSTOM_COLOR_MAP_LAYER(2),
+  [EEPROM_LAYER_03]               = CUSTOM_COLOR_MAP_LAYER(3),
+  [EEPROM_LAYER_04]               = CUSTOM_COLOR_MAP_LAYER(4),
+  [EEPROM_LAYER_05]               = CUSTOM_COLOR_MAP_LAYER(5),
+  [EEPROM_LAYER_06]               = CUSTOM_COLOR_MAP_LAYER(6),
+  [EEPROM_LAYER_07]               = CUSTOM_COLOR_MAP_LAYER(7),
+  [EEPROM_LAYER_08]               = CUSTOM_COLOR_MAP_LAYER(8),
+  [EEPROM_LAYER_09]               = CUSTOM_COLOR_MAP_LAYER(9),
+  [EEPROM_LAYER_10]               = CUSTOM_COLOR_MAP_LAYER(10),
+  [EEPROM_LAYER_11]               = CUSTOM_COLOR_MAP_LAYER(11),
+  [EEPROM_LAYER_12]               = CUSTOM_COLOR_MAP_LAYER(12),
+  [EEPROM_LAYER_13]               = CUSTOM_COLOR_MAP_LAYER(13),
+  [EEPROM_LAYER_14]               = CUSTOM_COLOR_MAP_LAYER(14),
+  [EEPROM_LAYER_15]               = CUSTOM_COLOR_MAP_LAYER(15),
+  [EEPROM_LAYER_16]               = CUSTOM_COLOR_MAP_LAYER(0),
+  [EEPROM_LAYER_17]               = CUSTOM_COLOR_MAP_LAYER(0),
+  [EEPROM_LAYER_18]               = CUSTOM_COLOR_MAP_LAYER(0),
+  [EEPROM_LAYER_19]               = CUSTOM_COLOR_MAP_LAYER(0),
+  [EEPROM_LAYER_20]               = CUSTOM_COLOR_MAP_LAYER(0)
+) // COLORMAPS(
+
+PALETTE(
+  HRGB(0x000000), HRGB(0x91B871), HRGB(0xFF00C2), HRGB(0x000000),
+  HRGB(0x000000), HRGB(0x000000), HRGB(0x000000), HRGB(0x000000),
+  HRGB(0x000000), HRGB(0x000000), HRGB(0x000000), HRGB(0x000000),
+  HRGB(0x000000), HRGB(0x000000), HRGB(0x000000), HRGB(0x000000)
+)
 
 // Enable clang formatter again
 // clang-format on
@@ -291,7 +355,10 @@ KALEIDOSCOPE_INIT_PLUGINS(
   Focus, FocusSettingsCommand, FocusEEPROMCommand,
 
   // LED plugins
-  LEDControl, LEDActiveLayerColorEffect, LEDPaletteTheme, ColormapEffect, LEDManager,
+  LEDControl, LEDActiveLayerColorEffect, LEDManager,
+
+  // Colormap Plugins
+  DefaultColormap, ColormapEffect, LEDPaletteTheme,
 
   // Support for macros
   Macros, DynamicMacros,
@@ -330,6 +397,8 @@ void setup() {
   MouseKeys.setWarpGridSize(MOUSE_WARP_GRID_3X3);
 
   LEDActiveLayerColorEffect.setColormap(layerColormap);
+
+  DefaultColormap.setup();
 
   Layer.move(LAYER_PRIMARY);
 }
