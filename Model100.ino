@@ -99,7 +99,8 @@ enum {
 
   // Layer Aliases
   LAYER_RPG_MAKER_REBORN = EEPROM_LAYER_01,
-  LAYER_BLOCK_MOD_KEYS = EEPROM_LAYER_02
+  LAYER_BLOCK_MOD_KEYS = EEPROM_LAYER_02,
+  LAYER_QWERTY = EEPROM_LAYER_03
 };  // layers
 
 #define TOTAL_LAYERS FIRMWARE_LAYER_COUNT + EEPROM_LAYER_COUNT
@@ -128,7 +129,8 @@ NCS_KEYS(
   (KEY_8_F8,          Key_8,                Key_F8),
   (KEY_9_F9,          Key_9,                Key_F9),
   (KEY_0_F10,         Key_0,                Key_F10),
-  (KEY_ESC_HUB,       Key_Escape,           ShiftToLayer(LAYER_HUB))
+  (KEY_ESC_HUB,       Key_Escape,           ShiftToLayer(LAYER_HUB)),
+  (BCK_SPC_DEL,       Key_Backspace,        Key_Delete)
 )
 
 KEYMAPS(
@@ -138,7 +140,7 @@ KEYMAPS(
    ___,                 Key_B,              Key_Y,              Key_O,              Key_U,              NCS(P_L_1_5),       ___,
    Key_Tab,             Key_C,              Key_I,              Key_E,              Key_A,              NCS(P_L_2_5),
    Key_Escape,          Key_G,              Key_X,              Key_J,              Key_K,              NCS(P_L_3_5),       ___,
-   MOD_LAYER_CONTROL,                       Key_Backspace,                          LockLayer(LAYER_MOUSE),                 NCS(KEY_ESC_HUB),
+   MOD_LAYER_CONTROL,                       NCS(BCK_SPC_DEL),                       LockLayer(LAYER_MOUSE),                 NCS(KEY_ESC_HUB),
    Key_LShift,
 
    ___,                 NCS(KEY_6_F6),      NCS(KEY_7_F7),      NCS(KEY_8_F8),      NCS(KEY_9_F9),      NCS(KEY_0_F10),     ___,
@@ -239,7 +241,7 @@ KEYMAPS(
    XXX),
 
   [LAYER_RPG_MAKER_REBORN] = KEYMAP_STACKED
-  (MOVE_PRIMARY,       XXX,                XXX,                XXX,                XXX,                XXX,                Key_F12,
+  (MOVE_PRIMARY,        XXX,                XXX,                XXX,                XXX,                XXX,                Key_F12,
    XXX,                 XXX,                Key_Q,              Key_UpArrow,        Key_W,              XXX,                XXX,
    XXX,                 Key_X,              Key_LArrow,         Key_DnArrow,        Key_RArrow,         XXX,
    XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
@@ -257,7 +259,7 @@ KEYMAPS(
    ___,                 ___,                ___,                ___,                ___,                ___,                ___,
    ___,                 ___,                ___,                ___,                ___,                ___,
    ___,                 ___,                ___,                ___,                ___,                ___,                ___,
-   Key_LCtrl,                               ___,                                    ___,                                    ___,
+   Key_LCtrl,                               Key_Backspace,                          ___,                                    ___,
    Key_LShift,
 
    ___,                 ___,                ___,                ___,                ___,                ___,                ___,
@@ -266,7 +268,21 @@ KEYMAPS(
    ___,                 ___,                ___,                ___,                ___,                ___,                ___,
    Key_LGui,                                ___,                                    ___,                                    Key_LAlt,
    XXX),
-  [EEPROM_LAYER_03] = LAYER_BLOCK,
+
+  [LAYER_QWERTY] = KEYMAP_STACKED
+  (MOVE_PRIMARY,        Key_1,              Key_2,              Key_3,              Key_4,              Key_5,              Key_Y,
+   XXX,                 Key_Q,              Key_W,              Key_E,              Key_R,              Key_T,              Key_H,
+   Key_Tab,             Key_A,              Key_S,              Key_D,              Key_F,              Key_G,
+   Key_Escape,          Key_Z,              Key_X,              Key_C,              Key_V,              Key_B,              Key_N,
+   Key_LCtrl,                               Key_Spacebar,                           Key_Enter,                              Key_LAlt,
+   Key_LShift,
+   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+                        XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+   XXX,                 XXX,                XXX,                XXX,                XXX,                XXX,                XXX,
+   XXX,                                     XXX,                                    XXX,                                    XXX,
+   XXX),
+
   [EEPROM_LAYER_04] = LAYER_BLOCK,
   [EEPROM_LAYER_05] = LAYER_BLOCK,
   [EEPROM_LAYER_06] = LAYER_BLOCK,
@@ -331,7 +347,7 @@ COLORMAPS(
 ) // COLORMAPS(
 
 PALETTE(
-  HRGB(0x000000), HRGB(0x91B871), HRGB(0xFF00C2), HRGB(0x000000),
+  HRGB(0x000000), HRGB(0x91B871), HRGB(0xFF00C2), HRGB(0x35EEF7),
   HRGB(0x000000), HRGB(0x000000), HRGB(0x000000), HRGB(0x000000),
   HRGB(0x000000), HRGB(0x000000), HRGB(0x000000), HRGB(0x000000),
   HRGB(0x000000), HRGB(0x000000), HRGB(0x000000), HRGB(0x000000)
